@@ -8,6 +8,10 @@ kernelspec:
 ---
 
 # Quickstart
+
+<p style="font-size: 14px; color: grey; text-align: right;">by <a
+href="https://developer.nvidia.com/blog/author/mnicely/">Matthew Nicely</a></p>
+
 Python plays a key role within the science, engineering, data analytics, and
 deep learning application ecosystem. NVIDIA has long been committed to helping
 the Python ecosystem leverage the accelerated massively parallel performance of
@@ -32,7 +36,7 @@ is a low-level virtual machine and instruction set architecture (ISA). You
 construct your device code in the form of a string and compile it with
 [NVRTC](http://docs.nvidia.com/cuda/nvrtc/index.html), a runtime compilation
 library for CUDA C++. Using the NVIDIA [Driver
-API(http://docs.nvidia.com/cuda/cuda-driver-api/index.html)], manually create a
+API](http://docs.nvidia.com/cuda/cuda-driver-api/index.html), manually create a
 CUDA context and all required resources on the GPU, then launch the compiled
 CUDA C++ code and retrieve the results from the GPU. Now that you have an
 overview, jump into a commonly used example for parallel programming:
