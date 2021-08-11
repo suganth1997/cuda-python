@@ -163,6 +163,10 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="release.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="release/11.4.0-notes.html">    11.4.0</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">CUDA Python API Reference</a></li>
 </ul>
 
@@ -197,9 +201,10 @@
 </div>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>Dependencies of the CUDA-Python bindings and some versions that are known to
-work are as follows:</p>
+<p>CUDA Python is supported on all platforms that CUDA is supported. Specific
+dependencies are as follows:</p>
 <ul class="simple">
+<li><p>Driver: Linux (450.80.02 or later) Windows(456.38 or later)</p></li>
 <li><p>CUDA Toolkit 11.0 to 11.4 - e.g. 11.4.48</p></li>
 <li><p>Cython - e.g. 0.29.21</p></li>
 <li><p>Versioneer - e.g. 0.20</p></li>

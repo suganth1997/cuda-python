@@ -1,13 +1,13 @@
 # Overview
 
-NVIDIA’s CUDA Python provides [Cython](https://cython.org/) bindings for a driver and runtime
-API for existing toolkits and libraries to simplify GPU-based accelerated
-processing. Python is one of the most popular programming languages for science,
-engineering, data analytics, and deep learning applications. However, as an
-interpreted language, it has limitations for high-performance computing
-applications. The goal of CUDA Python is to unify the Python ecosystem with
-a single set of interfaces that provide full coverage of and access to the CUDA
-host APIs from Python.
+NVIDIA’s CUDA Python provides [Cython](https://cython.org/) bindings and Python
+wrappers for the driver and runtime API for existing toolkits and libraries to
+simplify GPU-based accelerated processing. Python is one of the most popular
+programming languages for science, engineering, data analytics, and deep
+learning applications. However, as an interpreted language, it has limitations
+for high-performance computing applications. The goal of CUDA Python is to unify
+the Python ecosystem with a single set of interfaces that provide full coverage
+of and access to the CUDA host APIs from Python.
 
 ## Why CUDA Python?
 

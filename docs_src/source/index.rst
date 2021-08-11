@@ -15,6 +15,7 @@ CUDA Python Manual
    quickstart.md
    conduct.md
    contribute.md
+   release.md
    api.rst
 
 
