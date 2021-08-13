@@ -55,7 +55,10 @@ exclude_patterns = []
 html_baseurl = 'docs'
 html_theme = 'furo'
 # html_theme = 'pydata_sphinx_theme'
-html_logo = '_static/images/logo.png'
+html_theme_options = {
+	"light_logo": "logo-light-mode.png",
+    "dark_logo": "logo-dark-mode.png",
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
