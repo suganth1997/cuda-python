@@ -1,5 +1,5 @@
 # Motivation
-## Overview
+## What is CUDA Python?
 
 NVIDIA’s CUDA Python provides [Cython](https://cython.org/) bindings and Python
 wrappers for the driver and runtime API for existing toolkits and libraries to

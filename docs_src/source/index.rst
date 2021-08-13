@@ -11,7 +11,7 @@ CUDA Python Manual
    :caption: Contents:
 
    install.md
-   quickstart.md
+   overview.md
    motivation.md
    conduct.md
    contribute.md
