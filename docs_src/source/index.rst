@@ -10,12 +10,11 @@ CUDA Python Manual
    :maxdepth: 2
    :caption: Contents:
 
-   install.md
    overview.md
-   motivation.md
+   install.md
+   quickstart.md
    conduct.md
    contribute.md
-   release.md
    api.rst
 
 

@@ -2,7 +2,7 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Motivation" href="motivation.html" /><link rel="prev" title="Installation" href="install.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Installation" href="install.html" /><link rel="prev" title="CUDA Python Manual" href="index.html" />
 
     <meta name="generator" content="sphinx-4.1.2, furo 2021.07.31.beta41"/>
         <title>Overview - CUDA Python 11.4 documentation</title>
@@ -142,11 +142,10 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo only-light" src="_static/logo-light-mode.png" alt="Light Logo"/>
-    <img class="sidebar-logo only-dark" src="_static/logo-dark-mode.png" alt="Dark Logo"/>
+    <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
   </div>
   
   <span class="sidebar-brand-text">CUDA Python 11.4 documentation</span>
@@ -159,15 +158,11 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="motivation.html">Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conduct.html">Code of Conduct</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contributing</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="release.html">Release Notes</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="release/11.4.0-notes.html">    11.4.0</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">CUDA Python API Reference</a></li>
 </ul>
 
@@ -196,319 +191,43 @@
         </div>
         <div class="section" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p style="font-size: 14px; color: grey; text-align: right;">by <a href="https://developer.nvidia.com/blog/author/mnicely/">Matthew Nicely</a></p>
-<p>Python plays a key role within the science, engineering, data analytics, and
-deep learning application ecosystem. NVIDIA has long been committed to helping
-the Python ecosystem leverage the accelerated massively parallel performance of
-GPUs to deliver standardized libraries, tools, and applications. Today, we’re
-introducing another step towards simplification of the developer experience with
-improved Python code portability and compatibility.</p>
+<p>NVIDIA’s CUDA Python provides <a class="reference external" href="https://cython.org/">Cython</a> bindings for a driver and runtime
+API for existing toolkits and libraries to simplify GPU-based accelerated
+processing. Python is one of the most popular programming languages for science,
+engineering, data analytics, and deep learning applications. However, as an
+interpreted language, it has limitations for high-performance computing
+applications. The goal of CUDA Python is to unify the Python ecosystem with
+a single set of interfaces that provide full coverage of and access to the CUDA
+host APIs from Python.</p>
+<div class="section" id="why-cuda-python">
+<h2>Why CUDA Python?<a class="headerlink" href="#why-cuda-python" title="Permalink to this headline">¶</a></h2>
+<p>CUDA Python provides uniform APIs and bindings for inclusion into existing
+toolkits and libraries to simplify GPU-based parallel processing for HPC, data
+science, and AI.</p>
+<p><a class="reference external" href="https://numpy.org/">Numba</a>, a Python compiler from
+<a class="reference external" href="https://www.anaconda.com/">Anaconda</a> that can compile Python code for execution
+on CUDA-capable GPUs, provides Python developers with an easy entry into
+GPU-accelerated computing and a path for using increasingly sophisticated CUDA
+code with a minimum of new syntax and jargon. With CUDA Python and Numba, you
+get the best of both worlds: rapid iterative development with Python and the
+speed of a compiled language targeting both CPUs and NVIDIA GPUs.</p>
+<p><a class="reference external" href="https://cupy.dev/">CuPy</a> is a
+<a class="reference external" href="https://numpy.org/">NumPy</a>/<a class="reference external" href="https://www.scipy.org/">SciPy</a> compatible Array
+library, from <a class="reference external" href="https://www.preferred.jp/en/">Preferred Networks</a>, for
+GPU-accelerated computing with Python. CUDA Python simplifies the CuPy build and
+allows for a faster and smaller memory footprint when importing the CuPy Python
+module. In the future, when more CUDA Toolkit libraries are supported, CuPy will
+have a lighter maintenance overhead and have fewer wheels to release. Users
+benefit from a faster CUDA runtime!</p>
+</div>
+<div class="section" id="ecosystem">
+<h2>Ecosystem<a class="headerlink" href="#ecosystem" title="Permalink to this headline">¶</a></h2>
 <p>Our goal is to help unify the Python CUDA ecosystem with a single standard set
-of low-level interfaces, providing full coverage of and access to the CUDA host
-APIs from Python. We want to provide an ecosystem foundation to allow
-interoperability among different accelerated libraries. Most importantly, it
-should be easy for Python developers to use NVIDIA GPUs.</p>
-<div class="section" id="cuda-python-workflow">
-<h2>CUDA Python workflow<a class="headerlink" href="#cuda-python-workflow" title="Permalink to this headline">¶</a></h2>
-<p>Because Python is an interpreted language, you need a way to compile the device
-code into
-<a class="reference external" href="https://docs.nvidia.com/cuda/parallel-thread-execution/index.html">PTX</a> and
-then extract the function to be called at a later point in the application. It’s
-not important for understanding CUDA Python, but Parallel Thread Execution (PTX)
-is a low-level virtual machine and instruction set architecture (ISA). You
-construct your device code in the form of a string and compile it with
-<a class="reference external" href="http://docs.nvidia.com/cuda/nvrtc/index.html">NVRTC</a>, a runtime compilation
-library for CUDA C++. Using the NVIDIA <a class="reference external" href="http://docs.nvidia.com/cuda/cuda-driver-api/index.html">Driver
-API</a>, manually create a
-CUDA context and all required resources on the GPU, then launch the compiled
-CUDA C++ code and retrieve the results from the GPU. Now that you have an
-overview, jump into a commonly used example for parallel programming:
-<a class="reference external" href="https://developer.nvidia.com/blog/six-ways-saxpy/">SAXPY</a>.</p>
-<p>The first thing to do is import the <a class="reference external" href="https://docs.nvidia.com/cuda/cuda-driver-api/index.html">Driver
-API</a> and
-<a class="reference external" href="https://docs.nvidia.com/cuda/nvrtc/index.html">NVRTC</a> modules from the CUDA
-Python package. In this example, you copy data from the host to device. You need
-<a class="reference external" href="https://numpy.org/doc/stable/contents.html">NumPy</a> to store data on the host.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cuda</span> <span class="kn">import</span> <span class="n">cuda</span><span class="p">,</span> <span class="n">nvrtc</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Error checking is a fundamental best practice in code development and a code
-example is provided. For brevity, error checking within the example is omitted.
-In a future release, this may automatically raise exceptions using a Python
-object model.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ASSERT_DRV</span><span class="p">(</span><span class="n">err</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">cuda</span><span class="o">.</span><span class="n">CUresult</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">CUresult</span><span class="o">.</span><span class="n">CUDA_SUCCESS</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Cuda Error: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">nvrtc</span><span class="o">.</span><span class="n">nvrtcResult</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nvrtc</span><span class="o">.</span><span class="n">nvrtcResult</span><span class="o">.</span><span class="n">NVRTC_SUCCESS</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Nvrtc Error: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"Unknown error type: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>It’s common practice to write CUDA kernels near the top of a translation unit,
-so write it next. The entire kernel is wrapped in triple quotes to form a
-string. The string is compiled later using NVRTC. This is the only part of CUDA
-Python that requires some understanding of CUDA C++. For more information, see
-<a class="reference external" href="https://developer.nvidia.com/blog/even-easier-introduction-cuda/">An Even Easier Introduction to
-CUDA</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saxpy</span> <span class="o">=</span> <span class="s2">"""</span><span class="se">\</span>
-<span class="s2">extern "C" __global__</span>
-<span class="s2">void saxpy(float a, float *x, float *y, float *out, size_t n)</span>
-<span class="s2">{</span>
-<span class="s2"> size_t tid = blockIdx.x * blockDim.x + threadIdx.x;</span>
-<span class="s2"> if (tid &lt; n) {</span>
-<span class="s2">   out[tid] = a * x[tid] + y[tid];</span>
-<span class="s2"> }</span>
-<span class="s2">}</span>
-<span class="s2">"""</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Go ahead and compile the kernel into PTX. Remember that this is executed at runtime using NVRTC. There are three basic steps to NVRTC:</p>
-<ul class="simple">
-<li><p>Create a program from the string.</p></li>
-<li><p>Compile the program.</p></li>
-<li><p>Extract PTX from the compiled program.</p></li>
-</ul>
-<p>In the following code example, compilation is targeting compute capability 75,
-or Turing architecture, with FMAD enabled. If compilation fails, use
-<code class="docutils literal notranslate"><span class="pre">nvrtcGetProgramLog</span></code> to retrieve a compile log for additional information.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create program</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">prog</span> <span class="o">=</span> <span class="n">nvrtc</span><span class="o">.</span><span class="n">nvrtcCreateProgram</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">saxpy</span><span class="p">),</span> <span class="sa">b</span><span class="s2">"saxpy.cu"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[])</span>
-
-<span class="c1"># Compile program</span>
-<span class="n">opts</span> <span class="o">=</span> <span class="p">[</span><span class="sa">b</span><span class="s2">"--fmad=false"</span><span class="p">,</span> <span class="sa">b</span><span class="s2">"--gpu-architecture=compute_75"</span><span class="p">]</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">nvrtc</span><span class="o">.</span><span class="n">nvrtcCompileProgram</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">opts</span><span class="p">)</span>
-
-<span class="c1"># Get PTX from compilation</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">ptxSize</span> <span class="o">=</span> <span class="n">nvrtc</span><span class="o">.</span><span class="n">nvrtcGetPTXSize</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span>
-<span class="n">ptx</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">" "</span> <span class="o">*</span> <span class="n">ptxSize</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">nvrtc</span><span class="o">.</span><span class="n">nvrtcGetPTX</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">ptx</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Before you can use the PTX or do any work on the GPU, you must create a CUDA
-context. CUDA contexts are analogous to host processes for the device. In the
-following code example, the Driver API is initialized so that the NVIDIA driver
-and GPU are accessible. Next, a handle for compute device 0 is passed to
-<code class="docutils literal notranslate"><span class="pre">cuCtxCreate</span></code> to designate that GPU for context creation. With the context
-created, you can proceed in compiling the CUDA kernel using NVRTC.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize CUDA Driver API</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuInit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># Retrieve handle for device 0</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">cuDevice</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuDeviceGet</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># Create context</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuCtxCreate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cuDevice</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>With a CUDA context created on device 0, load the PTX generated earlier into a
-module. A module is analogous to dynamically loaded libraries for the device.
-After loading into the module, extract a specific kernel with
-<code class="docutils literal notranslate"><span class="pre">cuModuleGetFunction</span></code>. It is not uncommon for multiple kernels to reside in PTX.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load PTX as module data and retrieve function</span>
-<span class="n">ptx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ptx</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">module</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuModuleLoadData</span><span class="p">(</span><span class="n">ptx</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuModuleGetFunction</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="sa">b</span><span class="s2">"saxpy"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Next, get all your data prepared and transferred to the GPU. For increased
-application performance, you can input data on the device to eliminate data
-transfers. For completeness, this example shows how you would transfer data to
-and from the device.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NUM_THREADS</span> <span class="o">=</span> <span class="mi">512</span>  <span class="c1"># Threads per block</span>
-<span class="n">NUM_BLOCKS</span> <span class="o">=</span> <span class="mi">32768</span>  <span class="c1"># Blocks per grid</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">NUM_THREADS</span> <span class="o">*</span> <span class="n">NUM_BLOCKS</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">)</span>
-<span class="n">bufferSize</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">a</span><span class="o">.</span><span class="n">itemsize</span>
-
-<span class="n">hX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">hY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-<span class="n">hOut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>With the input data <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span></code>, and <code class="docutils literal notranslate"><span class="pre">y</span></code> created for the SAXPY transform device,
-resources must be allocated to store the data using <code class="docutils literal notranslate"><span class="pre">cuMemAlloc</span></code>. To allow for
-more overlap between compute and data movement, use the asynchronous function
-<code class="docutils literal notranslate"><span class="pre">cuMemcpyHtoDAsync</span></code>. It returns control to the CPU immediately following command
-execution.</p>
-<p>Python doesn’t have a natural concept of pointers, yet <code class="docutils literal notranslate"><span class="pre">cuMemcpyHtoDAsync</span></code> expects
-<code class="docutils literal notranslate"><span class="pre">void*</span></code>. Therefore, <code class="docutils literal notranslate"><span class="pre">XX.ctypes.data</span></code> retrieves the pointer value associated with
-XX.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">err</span><span class="p">,</span> <span class="n">dXclass</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemAlloc</span><span class="p">(</span><span class="n">bufferSize</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">dYclass</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemAlloc</span><span class="p">(</span><span class="n">bufferSize</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="n">dOutclass</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemAlloc</span><span class="p">(</span><span class="n">bufferSize</span><span class="p">)</span>
-
-<span class="n">err</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuStreamCreate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemcpyHtoDAsync</span><span class="p">(</span>
-   <span class="n">dXclass</span><span class="p">,</span> <span class="n">hX</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">,</span> <span class="n">stream</span>
-<span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemcpyHtoDAsync</span><span class="p">(</span>
-   <span class="n">dYclass</span><span class="p">,</span> <span class="n">hY</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">,</span> <span class="n">stream</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>With data prep and resources allocation finished, the kernel is ready to be
-launched. To pass the location of the data on the device to the kernel execution
-configuration, you must retrieve the device pointer. In the following code
-example, <code class="docutils literal notranslate"><span class="pre">int(dXclass)</span></code> retries the pointer value of <code class="docutils literal notranslate"><span class="pre">dXclass</span></code>, which is
-<code class="docutils literal notranslate"><span class="pre">CUdeviceptr</span></code>, and assigns a memory size to store this value using <code class="docutils literal notranslate"><span class="pre">np.array</span></code>.</p>
-<p>Like <code class="docutils literal notranslate"><span class="pre">cuMemcpyHtoDAsync</span></code>, <code class="docutils literal notranslate"><span class="pre">cuLaunchKernel</span></code> expects <code class="docutils literal notranslate"><span class="pre">void**</span></code> in the argument list. In
-the earlier code example, it creates <code class="docutils literal notranslate"><span class="pre">void**</span></code> by grabbing the <code class="docutils literal notranslate"><span class="pre">void*</span></code> value of each
-individual argument and placing them into its own contiguous memory.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following code example is not intuitive </span>
-<span class="c1"># Subject to change in a future release</span>
-<span class="n">dX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">dXclass</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">)</span>
-<span class="n">dY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">dYclass</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">)</span>
-<span class="n">dOut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">dOutclass</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">)</span>
-
-<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">dX</span><span class="p">,</span> <span class="n">dY</span><span class="p">,</span> <span class="n">dOut</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span>
-<span class="n">args</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">arg</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint64</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now the kernel can be launched:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuLaunchKernel</span><span class="p">(</span>
-   <span class="n">kernel</span><span class="p">,</span>
-   <span class="n">NUM_BLOCKS</span><span class="p">,</span>  <span class="c1"># grid x dim</span>
-   <span class="mi">1</span><span class="p">,</span>  <span class="c1"># grid y dim</span>
-   <span class="mi">1</span><span class="p">,</span>  <span class="c1"># grid z dim</span>
-   <span class="n">NUM_THREADS</span><span class="p">,</span>  <span class="c1"># block x dim</span>
-   <span class="mi">1</span><span class="p">,</span>  <span class="c1"># block y dim</span>
-   <span class="mi">1</span><span class="p">,</span>  <span class="c1"># block z dim</span>
-   <span class="mi">0</span><span class="p">,</span>  <span class="c1"># dynamic shared memory</span>
-   <span class="n">stream</span><span class="p">,</span>  <span class="c1"># stream</span>
-   <span class="n">args</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>  <span class="c1"># kernel arguments</span>
-   <span class="mi">0</span><span class="p">,</span>  <span class="c1"># extra (ignore)</span>
-<span class="p">)</span>
-
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemcpyDtoHAsync</span><span class="p">(</span>
-   <span class="n">hOut</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dOutclass</span><span class="p">,</span> <span class="n">bufferSize</span><span class="p">,</span> <span class="n">stream</span>
-<span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuStreamSynchronize</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">cuLaunchKernel</span></code> function takes the compiled module kernel and execution
-configuration parameters. The device code is launched in the same stream as the
-data transfers. That ensures that the kernel’s compute is performed only after
-the data has finished transfer, as all API calls and kernel launches within a
-stream are serialized. After the call to transfer data back to the host is
-executed, <code class="docutils literal notranslate"><span class="pre">cuStreamSynchronize</span></code> is used to halt CPU execution until all operations
-in the designated stream are finished.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assert values are same after running kernel</span>
-<span class="n">hZ</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">hX</span> <span class="o">+</span> <span class="n">hY</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">hOut</span><span class="p">,</span> <span class="n">hZ</span><span class="p">):</span>
-   <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Error outside tolerance for host-device vectors"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Perform verification of the data to ensure correctness and finish the code with
-memory clean up.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuStreamDestroy</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemFree</span><span class="p">(</span><span class="n">dXclass</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemFree</span><span class="p">(</span><span class="n">dYclass</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuMemFree</span><span class="p">(</span><span class="n">dOutclass</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuModuleUnload</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
-<span class="n">err</span><span class="p">,</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuCtxDestroy</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="performance">
-<h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
-<p>Performance is a primary driver in targeting GPUs in your application. So, how
-does the above code compare to its C++ version? Table 1 shows that the results
-are nearly identical. <a class="reference external" href="https://developer.nvidia.com/nsight-systems">NVIDIA NSight
-Systems</a> was used to retrieve
-kernel performance and <a class="reference external" href="https://developer.nvidia.com/blog/how-implement-performance-metrics-cuda-cc/">CUDA
-Events</a>
-was used for application performance.</p>
-<p>The following command was used to profile the applications:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nsys profile -s none -t cuda --stats<span class="o">=</span><span class="nb">true</span> &lt;executable&gt;
-</pre></div>
-</div>
-<div class="table-wrapper"><table class="docutils align-default" id="id1">
-<caption><span class="caption-number">Table 1 </span><span class="caption-text">Kernel and application performance comparison.</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
-<colgroup>
-<col style="width: 33%"/>
-<col style="width: 33%"/>
-<col style="width: 33%"/>
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"></th>
-<th class="head"><p>C++</p></th>
-<th class="head"><p>Python</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Kernel execution</p></td>
-<td><p>352µs</p></td>
-<td><p>352µs</p></td>
-</tr>
-<tr class="row-odd"><td><p>Application execution</p></td>
-<td><p>1076ms</p></td>
-<td><p>1080ms</p></td>
-</tr>
-</tbody>
-</table></div>
-<p>CUDA Python is also compatible with <a class="reference external" href="https://developer.nvidia.com/nsight-compute">NVIDIA Nsight
-Compute</a>, which is an
-interactive kernel profiler for CUDA applications. It allows you to have
-detailed insights into kernel performance. This is useful when you’re trying to
-maximize performance (<a class="reference internal" href="#figure-1"><span class="std std-numref">Fig. 1</span></a>).</p>
-<div class="figure align-default" id="figure-1">
-<img alt="_images/Nsigth-Compute-CLI-625x473.png" src="_images/Nsigth-Compute-CLI-625x473.png"/>
-<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Screenshot of Nsight Compute CLI output of CUDA Python example.</span><a class="headerlink" href="#figure-1" title="Permalink to this image">¶</a></p>
-</div>
+of interfaces, providing full coverage of, and access to, the CUDA host APIs
+from Python. We want to provide a foundation for the ecosystem to build on top
+of in unison to allow composing different accelerated libraries together to
+solve the problems at hand. We also want to lower the barrier to entry for
+Python developers to utilize NVIDIA GPUs.</p>
 </div>
 </div>
 
@@ -516,23 +235,23 @@ maximize performance (<a class="reference internal" href="#figure-1"><span class
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="motivation.html">
+          <a class="next-page" href="install.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Motivation</div>
+                <div class="title">Installation</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="install.html">
+          <a class="prev-page" href="index.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Installation</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>
@@ -567,8 +286,8 @@ maximize performance (<a class="reference internal" href="#figure-1"><span class
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Overview</a><ul>
-<li><a class="reference internal" href="#cuda-python-workflow">CUDA Python workflow</a></li>
-<li><a class="reference internal" href="#performance">Performance</a></li>
+<li><a class="reference internal" href="#why-cuda-python">Why CUDA Python?</a></li>
+<li><a class="reference internal" href="#ecosystem">Ecosystem</a></li>
 </ul>
 </li>
 </ul>

@@ -5,10 +5,9 @@
 
 ## Requirements
 
-CUDA Python is supported on all platforms that CUDA is supported. Specific
-dependencies are as follows:
+Dependencies of the CUDA-Python bindings and some versions that are known to
+work are as follows:
 
-* Driver: Linux (450.80.02 or later) Windows(456.38 or later)
 * CUDA Toolkit 11.0 to 11.4 - e.g. 11.4.48
 * Cython - e.g. 0.29.21
 * Versioneer - e.g. 0.20
