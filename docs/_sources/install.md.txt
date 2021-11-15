@@ -20,7 +20,7 @@ pip install cuda-python
 ## Installing from Conda
 
 ```{code-block} shell
-conda install cuda-python
+conda install -c nvidia cuda-python
 ```
 
 ## Installing from Source

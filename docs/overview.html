@@ -336,8 +336,12 @@ After loading into the module, extract a specific kernel with
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load PTX as module data and retrieve function</span>
 <span class="n">ptx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ptx</span><span class="p">)</span>
+
+<span class="c1"># Note: Incompatible --gpu-architecture would be detected here</span>
 <span class="n">err</span><span class="p">,</span> <span class="n">module</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuModuleLoadData</span><span class="p">(</span><span class="n">ptx</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">ASSERT_DRV</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 <span class="n">err</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cuModuleGetFunction</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="sa">b</span><span class="s2">"saxpy"</span><span class="p">)</span>
+<span class="n">ASSERT_DRV</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -448,18 +452,6 @@ in the designated stream are finished.</p>
 <span class="n">hZ</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">hX</span> <span class="o">+</span> <span class="n">hY</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">hOut</span><span class="p">,</span> <span class="n">hZ</span><span class="p">):</span>
    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Error outside tolerance for host-device vectors"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_18135</span><span class="o">/</span><span class="mf">1024579534.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">hZ</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">hX</span> <span class="o">+</span> <span class="n">hY</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">hOut</span><span class="p">,</span> <span class="n">hZ</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">4</span>    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Error outside tolerance for host-device vectors"</span><span class="p">)</span>
-
-<span class="ne">ValueError</span>: Error outside tolerance for host-device vectors
 </pre></div>
 </div>
 </div>
